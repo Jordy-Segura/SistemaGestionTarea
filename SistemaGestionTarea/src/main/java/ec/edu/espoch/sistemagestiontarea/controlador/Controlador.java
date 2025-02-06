@@ -4,17 +4,7 @@
  */
 package ec.edu.espoch.sistemagestiontarea.controlador;
 
-<<<<<<< HEAD
-import ec.edu.espoch.sistemagestiontarea.modelo.GestorTareas;
-import ec.edu.espoch.sistemagestiontarea.modelo.Tarea;
-import ec.edu.espoch.sistemagestiontarea.vista.Completas;
-import ec.edu.espoch.sistemagestiontarea.vista.Interfaz;
-import ec.edu.espoch.sistemagestiontarea.vista.Pendientes;
-
-/**
-=======
 /*
->>>>>>> 502f3f6d6b802e38f48612159d84196023abb081
  *
  * @author SO-LAB1-PC24
  */
@@ -38,7 +28,6 @@ public class Controlador {
         this.gestorTareas = new GestorTareas();
     }
 
-<<<<<<< HEAD
     public void procesoGestorTareas() {                            
         try{
         String titulo = Vista.getTituloTarea();
@@ -63,27 +52,3 @@ public class Controlador {
     
 
 }
-=======
-    public void procesoGestorTareas() {
-        try {
-            String titulo = Vista.getTituloTarea();
-            String Descripcion = Vista.getDescripcion();
-            boolean Pendiente = Vista.setPendiente();
-            boolean Completada = Vista.setCompletada();
-
-            Tarea tarea = new Tarea(0, titulo, Descripcion, Completada);
-
-            gestorTareas.agregarTarea(tarea);
-
-            if (Completada) {
-                Vista.setMostarTareas(titulo + " " + Descripcion + " " + "Completada");
-            } else if (Pendiente) {
-                Vista.setMostarTareas(titulo + " " + Descripcion + " " + "Pendiente");
-            }
-        } catch (NumberFormatException e) {
-            Vista.setMostarTareas("Error cambiate a ambiental");
-        }
-    }
-}
-   
->>>>>>> 502f3f6d6b802e38f48612159d84196023abb081
