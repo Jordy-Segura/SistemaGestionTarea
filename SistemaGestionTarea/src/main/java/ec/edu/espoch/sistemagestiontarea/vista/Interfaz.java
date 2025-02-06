@@ -15,6 +15,7 @@ public class Interfaz extends javax.swing.JFrame {
      */
     public Interfaz() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -30,7 +31,7 @@ public class Interfaz extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         lbdTitulo = new javax.swing.JLabel();
         lbdTituloTarea = new javax.swing.JLabel();
-        lbdDescripción = new javax.swing.JLabel();
+        lbdDescripcion = new javax.swing.JLabel();
         TextTituloTarea = new javax.swing.JTextField();
         RdbTareaSI = new javax.swing.JRadioButton();
         RdbTareaNo = new javax.swing.JRadioButton();
@@ -44,6 +45,7 @@ public class Interfaz extends javax.swing.JFrame {
         mIPendientes = new javax.swing.JMenuItem();
         mICompletas = new javax.swing.JMenuItem();
         MenuSalir = new javax.swing.JMenu();
+        menuItemCerrar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,7 +54,7 @@ public class Interfaz extends javax.swing.JFrame {
 
         lbdTituloTarea.setText("Título:");
 
-        lbdDescripción.setText("Descripción:");
+        lbdDescripcion.setText("Descripción:");
 
         TextTituloTarea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,17 +79,46 @@ public class Interfaz extends javax.swing.JFrame {
         MenuTareas.setText("Tarea");
 
         mItemNueva.setText("Nueva");
+        mItemNueva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mItemNuevaActionPerformed(evt);
+            }
+        });
         MenuTareas.add(mItemNueva);
 
         mIPendientes.setText("Pendientes");
+        mIPendientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mIPendientesActionPerformed(evt);
+            }
+        });
         MenuTareas.add(mIPendientes);
 
         mICompletas.setText("Completas");
+        mICompletas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mICompletasActionPerformed(evt);
+            }
+        });
         MenuTareas.add(mICompletas);
 
         jMenuBar1.add(MenuTareas);
 
         MenuSalir.setText("Salir");
+        MenuSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuSalirActionPerformed(evt);
+            }
+        });
+
+        menuItemCerrar.setText("Cerrar");
+        menuItemCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemCerrarActionPerformed(evt);
+            }
+        });
+        MenuSalir.add(menuItemCerrar);
+
         jMenuBar1.add(MenuSalir);
 
         setJMenuBar(jMenuBar1);
@@ -101,7 +132,7 @@ public class Interfaz extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbdDescripción)
+                            .addComponent(lbdDescripcion)
                             .addComponent(jLabel1))
                         .addGap(304, 304, 304))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -143,7 +174,7 @@ public class Interfaz extends javax.swing.JFrame {
                     .addComponent(lbdTituloTarea))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbdDescripción)
+                    .addComponent(lbdDescripcion)
                     .addComponent(TextDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -165,6 +196,40 @@ public class Interfaz extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TextTituloTareaActionPerformed
 
+    private void mItemNuevaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemNuevaActionPerformed
+        // TODO add your handling code here:
+        Interfaz obInterfaz = new Interfaz();
+        obInterfaz.setVisible(true);
+        obInterfaz.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_mItemNuevaActionPerformed
+
+    private void MenuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuSalirActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_MenuSalirActionPerformed
+
+    private void menuItemCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemCerrarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_menuItemCerrarActionPerformed
+
+    private void mIPendientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mIPendientesActionPerformed
+        // TODO add your handling code here:
+        Pendientes objPendientes = new Pendientes();
+        objPendientes.setVisible(true);
+        objPendientes.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_mIPendientesActionPerformed
+
+    private void mICompletasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mICompletasActionPerformed
+        // TODO add your handling code here:
+        Completas objCompletas = new Completas();
+        objCompletas.setVisible(true);
+        objCompletas.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_mICompletasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -183,11 +248,12 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JLabel lbdDescripción;
+    private javax.swing.JLabel lbdDescripcion;
     private javax.swing.JLabel lbdTitulo;
     private javax.swing.JLabel lbdTituloTarea;
     private javax.swing.JMenuItem mICompletas;
     private javax.swing.JMenuItem mIPendientes;
     private javax.swing.JMenuItem mItemNueva;
+    private javax.swing.JMenuItem menuItemCerrar;
     // End of variables declaration//GEN-END:variables
 }

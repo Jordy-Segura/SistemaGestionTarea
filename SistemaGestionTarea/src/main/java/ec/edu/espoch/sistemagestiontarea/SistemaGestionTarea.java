@@ -4,6 +4,8 @@
 
 package ec.edu.espoch.sistemagestiontarea;
 
+import ec.edu.espoch.sistemagestiontarea.vista.Interfaz;
+
 /**
  *
  * @author jordy
@@ -11,6 +13,7 @@ package ec.edu.espoch.sistemagestiontarea;
 public class SistemaGestionTarea {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        Interfaz objInterfaz = new Interfaz();
+        objInterfaz.setVisible(true);
     }
 }
