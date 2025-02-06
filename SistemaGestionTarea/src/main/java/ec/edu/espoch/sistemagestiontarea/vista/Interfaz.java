@@ -7,7 +7,7 @@ package ec.edu.espoch.sistemagestiontarea.vista;
 import ec.edu.espoch.sistemagestiontarea.controlador.Controlador;
 import ec.edu.espoch.sistemagestiontarea.modelo.GestorTareas;
 import ec.edu.espoch.sistemagestiontarea.modelo.Tarea;
-import java.util.List;
+
 
 /**
  *
@@ -25,8 +25,7 @@ public class Interfaz extends javax.swing.JFrame {
         GestorTareas gestorTareas = new GestorTareas();
         Completas vistaCompletas = new Completas();
         Pendientes vistaPendientes = new Pendientes();
-        controlador=new Controlador(gestorTareas, this);
-        setLocationRelativeTo(null);
+        controlador=new Controlador(vistaCompletas, vistaPendientes, this);
         
     }
 
@@ -229,11 +228,7 @@ public class Interfaz extends javax.swing.JFrame {
         obInterfaz.setLocationRelativeTo(null);
         this.dispose();
 
-        String titulo = TextTituloTarea.getText();
-        String descripcion = TextDescripcion.getText();
-        boolean completada = RdbTareaSI.isSelected();
-
-        controlador.agregarTarea();
+        controlador.procesoGestorTareas();
         limpiarCampos();
     }//GEN-LAST:event_mItemNuevaActionPerformed
 
@@ -261,8 +256,7 @@ public class Interfaz extends javax.swing.JFrame {
         objPendientes.setVisible(true);
         objPendientes.setLocationRelativeTo(null);
         this.dispose();
-        
-        controlador.obtenerTareasPendientes();
+         controlador.procesoGestorTareas();
     }//GEN-LAST:event_mIPendientesActionPerformed
 
     private void mICompletasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mICompletasActionPerformed
@@ -272,13 +266,12 @@ public class Interfaz extends javax.swing.JFrame {
         objCompletas.setLocationRelativeTo(null);
         this.dispose();
         
-        controlador.agregarTarea();
-        controlador.obtenerTareasCompletadas();
+        controlador.procesoGestorTareas();
     }//GEN-LAST:event_mICompletasActionPerformed
 
     private void BtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarActionPerformed
         // TODO add your handling code here:
-        controlador.agregarTarea();
+        controlador.procesoGestorTareas();
         
 
     }//GEN-LAST:event_BtnAgregarActionPerformed
@@ -299,7 +292,13 @@ public class Interfaz extends javax.swing.JFrame {
     public void setMostarTareas(String mostrar) {
         jTextArea1.setText(String.valueOf(mostrar));
     }
+    
 
+    
+    public boolean setPendiente() {
+        return RdbTareaNo.isSelected();
+    }
+    
     public boolean setCompletada() {
         return RdbTareaSI.isSelected();
     }

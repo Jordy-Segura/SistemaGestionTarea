@@ -152,8 +152,8 @@ public class Completas extends javax.swing.JFrame {
         objPendientes.setLocationRelativeTo(null);
         this.dispose();
         
-        controlador.agregarTarea();
-        controlador.obtenerTareasPendientes();
+        controlador.procesoGestorTareas();
+
     }//GEN-LAST:event_mIPendientes1ActionPerformed
 
     private void mICompletas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mICompletas1ActionPerformed
@@ -163,8 +163,8 @@ public class Completas extends javax.swing.JFrame {
         objCompletas.setLocationRelativeTo(null);
         this.dispose();
         
-        controlador.agregarTarea();
-        controlador.obtenerTareasCompletadas();
+        controlador.procesoGestorTareas();
+
     }//GEN-LAST:event_mICompletas1ActionPerformed
     
     

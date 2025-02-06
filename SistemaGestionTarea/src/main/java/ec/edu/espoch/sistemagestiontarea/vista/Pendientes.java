@@ -211,8 +211,8 @@ public class Pendientes extends javax.swing.JFrame {
         objPendientes.setLocationRelativeTo(null);
         this.dispose();
         
-        controlador.agregarTarea();
-        controlador.obtenerTareasPendientes();
+        controlador.procesoGestorTareas();
+
 
     }//GEN-LAST:event_mIPendientes1ActionPerformed
 

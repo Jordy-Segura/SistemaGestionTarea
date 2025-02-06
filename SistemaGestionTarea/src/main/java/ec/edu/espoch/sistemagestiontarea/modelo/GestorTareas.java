@@ -13,7 +13,7 @@ public class GestorTareas {
     private int cantidadTareas;
 
     public GestorTareas() {
-        tareas = new String[10]; 
+        tareas = new String[20]; 
         contadorId = 1;
         cantidadTareas = 0;
     }
@@ -40,6 +40,7 @@ public class GestorTareas {
         }
         return pendientes;
     }
+    
 
     public String[] listarTareasCompletadas() {
         String[] completadas = new String[cantidadTareas];
