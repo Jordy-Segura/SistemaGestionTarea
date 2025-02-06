@@ -6,7 +6,6 @@ package ec.edu.espoch.sistemagestiontarea.vista;
 
 import ec.edu.espoch.sistemagestiontarea.controlador.Controlador;
 import ec.edu.espoch.sistemagestiontarea.modelo.GestorTareas;
-import ec.edu.espoch.sistemagestiontarea.modelo.Tarea;
 import java.util.List;
 
 /**
@@ -330,4 +329,8 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JMenuItem mItemNueva;
     private javax.swing.JMenuItem menuItemCerrar;
     // End of variables declaration//GEN-END:variables
+
+    public boolean setPendiente() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
