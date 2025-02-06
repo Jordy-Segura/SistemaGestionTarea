@@ -4,17 +4,25 @@
  */
 package ec.edu.espoch.sistemagestiontarea.vista;
 
+import ec.edu.espoch.sistemagestiontarea.controlador.Controlador;
+import ec.edu.espoch.sistemagestiontarea.modelo.Tarea;
+
+
 /**
  *
  * @author papel
  */
 public class Completas extends javax.swing.JFrame {
-
+    private Controlador controlador;
     /**
      * Creates new form Completas
      */
     public Completas() {
         initComponents();
+    }
+    
+    public void setControlador(Controlador controlador) {
+        this.controlador = controlador;
     }
 
     /**
@@ -27,14 +35,8 @@ public class Completas extends javax.swing.JFrame {
     private void initComponents() {
 
         lbdTitulo = new javax.swing.JLabel();
-        lbdTituloTareaP = new javax.swing.JLabel();
-        lbdDescripcionP = new javax.swing.JLabel();
-        TextTituloTareaP = new javax.swing.JTextField();
-        TextDescripcionP = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        BtnMostrar = new javax.swing.JButton();
-        BtnLimpiar = new javax.swing.JButton();
         jMenuBar2 = new javax.swing.JMenuBar();
         MenuTareas1 = new javax.swing.JMenu();
         mItemNueva1 = new javax.swing.JMenuItem();
@@ -48,23 +50,9 @@ public class Completas extends javax.swing.JFrame {
         lbdTitulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lbdTitulo.setText("TAREAS COMPLETAS");
 
-        lbdTituloTareaP.setText("Título:");
-
-        lbdDescripcionP.setText("Descripción:");
-
-        TextTituloTareaP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TextTituloTareaPActionPerformed(evt);
-            }
-        });
-
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
-
-        BtnMostrar.setText("Mostrar");
-
-        BtnLimpiar.setText("Limpiar");
 
         MenuTareas1.setText("Tarea");
 
@@ -77,9 +65,19 @@ public class Completas extends javax.swing.JFrame {
         MenuTareas1.add(mItemNueva1);
 
         mIPendientes1.setText("Pendientes");
+        mIPendientes1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mIPendientes1ActionPerformed(evt);
+            }
+        });
         MenuTareas1.add(mIPendientes1);
 
         mICompletas1.setText("Completas");
+        mICompletas1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mICompletas1ActionPerformed(evt);
+            }
+        });
         MenuTareas1.add(mICompletas1);
 
         jMenuBar2.add(MenuTareas1);
@@ -108,56 +106,27 @@ public class Completas extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(BtnMostrar)
-                        .addGap(80, 80, 80)
-                        .addComponent(BtnLimpiar))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(111, 111, 111)
-                            .addComponent(lbdTitulo))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(98, 98, 98)
-                            .addComponent(lbdTituloTareaP)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(TextTituloTareaP, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(86, 86, 86)
-                            .addComponent(lbdDescripcionP)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(TextDescripcionP, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(116, Short.MAX_VALUE))
+                        .addGap(111, 111, 111)
+                        .addComponent(lbdTitulo))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addComponent(lbdTitulo)
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbdTituloTareaP)
-                    .addComponent(TextTituloTareaP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbdDescripcionP)
-                    .addComponent(TextDescripcionP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtnMostrar)
-                    .addComponent(BtnLimpiar))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void TextTituloTareaPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextTituloTareaPActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TextTituloTareaPActionPerformed
 
     private void mItemNueva1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemNueva1ActionPerformed
         // TODO add your handling code here:
@@ -176,27 +145,55 @@ public class Completas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_MenuSalir1ActionPerformed
 
+    private void mIPendientes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mIPendientes1ActionPerformed
+        // TODO add your handling code here:
+        Pendientes objPendientes = new Pendientes();
+        objPendientes.setVisible(true);
+        objPendientes.setLocationRelativeTo(null);
+        this.dispose();
+        
+        controlador.agregarTarea();
+        controlador.obtenerTareasPendientes();
+    }//GEN-LAST:event_mIPendientes1ActionPerformed
+
+    private void mICompletas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mICompletas1ActionPerformed
+        // TODO add your handling code here:
+        Completas objCompletas = new Completas();
+        objCompletas.setVisible(true);
+        objCompletas.setLocationRelativeTo(null);
+        this.dispose();
+        
+        controlador.agregarTarea();
+        controlador.obtenerTareasCompletadas();
+    }//GEN-LAST:event_mICompletas1ActionPerformed
+    
+    
+    private void mostrarTareas(String[] tareas) {
+        StringBuilder sb = new StringBuilder();
+        for (String tarea : tareas) {
+            if (tarea != null) {
+                sb.append(tarea).append("\n\n");
+            }
+        }
+        jTextArea1.setText(sb.toString());
+    }
     /**
      * @param args the command line arguments
      */
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnLimpiar;
-    private javax.swing.JButton BtnMostrar;
     private javax.swing.JMenu MenuSalir1;
     private javax.swing.JMenu MenuTareas1;
-    private javax.swing.JTextField TextDescripcionP;
-    private javax.swing.JTextField TextTituloTareaP;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JLabel lbdDescripcionP;
     private javax.swing.JLabel lbdTitulo;
-    private javax.swing.JLabel lbdTituloTareaP;
     private javax.swing.JMenuItem mICompletas1;
     private javax.swing.JMenuItem mIPendientes1;
     private javax.swing.JMenuItem mItemNueva1;
     private javax.swing.JMenuItem menuItemCerrar1;
     // End of variables declaration//GEN-END:variables
+
+
 }

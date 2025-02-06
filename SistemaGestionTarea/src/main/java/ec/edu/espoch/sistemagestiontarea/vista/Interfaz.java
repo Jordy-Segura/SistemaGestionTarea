@@ -4,18 +4,34 @@
  */
 package ec.edu.espoch.sistemagestiontarea.vista;
 
+import ec.edu.espoch.sistemagestiontarea.controlador.Controlador;
+import ec.edu.espoch.sistemagestiontarea.modelo.GestorTareas;
+import ec.edu.espoch.sistemagestiontarea.modelo.Tarea;
+import java.util.List;
+
 /**
  *
  * @author SO-LAB1-PC20
  */
 public class Interfaz extends javax.swing.JFrame {
 
+    private Controlador controlador;
+
     /**
      * Creates new form Interfaz
      */
     public Interfaz() {
         initComponents();
+        GestorTareas gestorTareas = new GestorTareas();
+        Completas vistaCompletas = new Completas();
+        Pendientes vistaPendientes = new Pendientes();
+        controlador=new Controlador(gestorTareas, this);
         setLocationRelativeTo(null);
+        
+    }
+
+    public void setControlador(Controlador controlador) {
+        this.controlador = controlador;
     }
 
     /**
@@ -27,6 +43,7 @@ public class Interfaz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnGroupCompletaSiNo = new javax.swing.ButtonGroup();
         TextDescripcion = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         lbdTitulo = new javax.swing.JLabel();
@@ -35,11 +52,11 @@ public class Interfaz extends javax.swing.JFrame {
         TextTituloTarea = new javax.swing.JTextField();
         RdbTareaSI = new javax.swing.JRadioButton();
         RdbTareaNo = new javax.swing.JRadioButton();
-        BtnMostrar = new javax.swing.JButton();
         BtnLimpiar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        BtnAgregar = new javax.swing.JButton();
+        MenuBar = new javax.swing.JMenuBar();
         MenuTareas = new javax.swing.JMenu();
         mItemNueva = new javax.swing.JMenuItem();
         mIPendientes = new javax.swing.JMenuItem();
@@ -62,19 +79,31 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
+        btnGroupCompletaSiNo.add(RdbTareaSI);
         RdbTareaSI.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         RdbTareaSI.setText("Completa");
 
+        btnGroupCompletaSiNo.add(RdbTareaNo);
         RdbTareaNo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        RdbTareaNo.setText("Incompleta");
-
-        BtnMostrar.setText("Mostrar");
+        RdbTareaNo.setText("Pendiente");
 
         BtnLimpiar.setText("Limpiar");
+        BtnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnLimpiarActionPerformed(evt);
+            }
+        });
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
+
+        BtnAgregar.setText("Agregar");
+        BtnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAgregarActionPerformed(evt);
+            }
+        });
 
         MenuTareas.setText("Tarea");
 
@@ -102,7 +131,7 @@ public class Interfaz extends javax.swing.JFrame {
         });
         MenuTareas.add(mICompletas);
 
-        jMenuBar1.add(MenuTareas);
+        MenuBar.add(MenuTareas);
 
         MenuSalir.setText("Salir");
         MenuSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -119,16 +148,16 @@ public class Interfaz extends javax.swing.JFrame {
         });
         MenuSalir.add(menuItemCerrar);
 
-        jMenuBar1.add(MenuSalir);
+        MenuBar.add(MenuSalir);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(MenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(95, Short.MAX_VALUE)
+                .addGap(69, 69, 69)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -138,7 +167,12 @@ public class Interfaz extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(RdbTareaNo)
-                            .addComponent(lbdTitulo))
+                            .addComponent(lbdTitulo)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(BtnAgregar)
+                                .addGap(138, 138, 138)
+                                .addComponent(BtnLimpiar))
+                            .addComponent(jScrollPane1))
                         .addGap(111, 111, 111))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,15 +185,7 @@ public class Interfaz extends javax.swing.JFrame {
                             .addComponent(TextDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(87, 87, 87)
-                        .addComponent(RdbTareaSI))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(97, 97, 97)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(BtnMostrar)
-                                .addGap(80, 80, 80)
-                                .addComponent(BtnLimpiar)))))
+                        .addComponent(RdbTareaSI)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -182,8 +208,8 @@ public class Interfaz extends javax.swing.JFrame {
                     .addComponent(RdbTareaNo))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtnMostrar)
-                    .addComponent(BtnLimpiar))
+                    .addComponent(BtnLimpiar)
+                    .addComponent(BtnAgregar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(9, Short.MAX_VALUE))
@@ -202,11 +228,26 @@ public class Interfaz extends javax.swing.JFrame {
         obInterfaz.setVisible(true);
         obInterfaz.setLocationRelativeTo(null);
         this.dispose();
+
+        String titulo = TextTituloTarea.getText();
+        String descripcion = TextDescripcion.getText();
+        boolean completada = RdbTareaSI.isSelected();
+
+        controlador.agregarTarea();
+        limpiarCampos();
     }//GEN-LAST:event_mItemNuevaActionPerformed
+
+    private void limpiarCampos() {
+        TextTituloTarea.setText("");
+        TextDescripcion.setText("");
+        RdbTareaSI.setSelected(false);
+        RdbTareaNo.setSelected(false);
+        jTextArea1.setText("");
+    }
 
     private void MenuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuSalirActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_MenuSalirActionPerformed
 
     private void menuItemCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemCerrarActionPerformed
@@ -220,6 +261,8 @@ public class Interfaz extends javax.swing.JFrame {
         objPendientes.setVisible(true);
         objPendientes.setLocationRelativeTo(null);
         this.dispose();
+        
+        controlador.obtenerTareasPendientes();
     }//GEN-LAST:event_mIPendientesActionPerformed
 
     private void mICompletasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mICompletasActionPerformed
@@ -228,24 +271,55 @@ public class Interfaz extends javax.swing.JFrame {
         objCompletas.setVisible(true);
         objCompletas.setLocationRelativeTo(null);
         this.dispose();
+        
+        controlador.agregarTarea();
+        controlador.obtenerTareasCompletadas();
     }//GEN-LAST:event_mICompletasActionPerformed
+
+    private void BtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarActionPerformed
+        // TODO add your handling code here:
+        controlador.agregarTarea();
+        
+
+    }//GEN-LAST:event_BtnAgregarActionPerformed
+
+    private void BtnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLimpiarActionPerformed
+        // TODO add your handling code here:
+        limpiarCampos();
+    }//GEN-LAST:event_BtnLimpiarActionPerformed
+
+    public String getTituloTarea() {
+        return TextTituloTarea.getText();
+    }
+
+    public String getDescripcion() {
+        return TextDescripcion.getText();
+    }
+
+    public void setMostarTareas(String mostrar) {
+        jTextArea1.setText(String.valueOf(mostrar));
+    }
+
+    public boolean setCompletada() {
+        return RdbTareaSI.isSelected();
+    }
 
     /**
      * @param args the command line arguments
      */
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnAgregar;
     private javax.swing.JButton BtnLimpiar;
-    private javax.swing.JButton BtnMostrar;
+    private javax.swing.JMenuBar MenuBar;
     private javax.swing.JMenu MenuSalir;
     private javax.swing.JMenu MenuTareas;
     private javax.swing.JRadioButton RdbTareaNo;
     private javax.swing.JRadioButton RdbTareaSI;
     private javax.swing.JTextField TextDescripcion;
     private javax.swing.JTextField TextTituloTarea;
+    private javax.swing.ButtonGroup btnGroupCompletaSiNo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lbdDescripcion;
