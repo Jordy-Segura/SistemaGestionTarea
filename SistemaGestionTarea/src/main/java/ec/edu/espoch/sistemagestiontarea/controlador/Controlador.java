@@ -11,23 +11,19 @@ import ec.edu.espoch.sistemagestiontarea.vista.Interfaz;
  *
  * @author SO-LAB1-PC24
  */
-
 public class Controlador {
-private Interfaz vista;
-private GestorTareas modelo;
+
+    private Interfaz vista;
+    private GestorTareas modelo;
 
     public Controlador(Interfaz vista, GestorTareas modelo) {
         this.vista = vista;
         this.modelo = new GestorTareas();
     }
-    public void ProcesoGestorTareas (){
-        String titulo,descripcion;
-        
-        try {
-            titulo= vista.getTitle();
-            
-        }
+
+    public void ProcesoGestorTareas() {
+
+
+    }
     }
 
-
-}
