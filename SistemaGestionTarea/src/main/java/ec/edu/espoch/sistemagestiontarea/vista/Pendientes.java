@@ -5,7 +5,6 @@
 package ec.edu.espoch.sistemagestiontarea.vista;
 
 import ec.edu.espoch.sistemagestiontarea.controlador.Controlador;
-import ec.edu.espoch.sistemagestiontarea.modelo.Tarea;
 
 
 /**
