@@ -9,12 +9,13 @@ package ec.edu.espoch.sistemagestiontarea.modelo;
  * @author jordy
  */
 public class Tarea {
+
     private int id;
     private String titulo;
     private String descripcion;
     private boolean tareaCompleta;
 
-    public Tarea(int par, String titulo, String descripcion, boolean tareaCompleta) {
+    public Tarea(int id, String titulo, String descripcion, boolean tareaCompleta) {
         this.id = id;
         this.titulo = titulo;
         this.descripcion = descripcion;
@@ -45,13 +46,17 @@ public class Tarea {
         this.descripcion = descripcion;
     }
 
-    public boolean isTareaCompleta() {
+    public boolean getTareaCompleta() {
         return tareaCompleta;
     }
 
     public void setTareaCompleta(boolean tareaCompleta) {
         this.tareaCompleta = tareaCompleta;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "ID: " + id + " | Título: " + titulo + " | Descripción: " + descripcion + " | Estado: " + (tareaCompleta ? "Completa" : "Pendiente");
+    }
+
 }

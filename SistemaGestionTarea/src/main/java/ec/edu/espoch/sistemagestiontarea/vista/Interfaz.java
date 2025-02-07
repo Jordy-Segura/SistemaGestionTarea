@@ -5,7 +5,6 @@
 package ec.edu.espoch.sistemagestiontarea.vista;
 
 import ec.edu.espoch.sistemagestiontarea.controlador.Controlador;
-import ec.edu.espoch.sistemagestiontarea.modelo.GestorTareas;
 
 /**
  *
@@ -20,11 +19,11 @@ public class Interfaz extends javax.swing.JFrame {
      */
     public Interfaz() {
         initComponents();
-        GestorTareas gestorTareas = new GestorTareas();
         Completas vistaCompletas = new Completas();
         Pendientes vistaPendientes = new Pendientes();
-        controlador=new Controlador(vistaCompletas, vistaPendientes, this);
-        
+        controlador = new Controlador(vistaCompletas, vistaPendientes, this);
+        vistaCompletas.setControlador(controlador);
+        vistaPendientes.setControlador(controlador);
     }
 
     public void setControlador(Controlador controlador) {
@@ -154,7 +153,7 @@ public class Interfaz extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(69, 69, 69)
+                .addContainerGap(95, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -165,11 +164,7 @@ public class Interfaz extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(RdbTareaNo)
                             .addComponent(lbdTitulo)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(BtnAgregar)
-                                .addGap(138, 138, 138)
-                                .addComponent(BtnLimpiar))
-                            .addComponent(jScrollPane1))
+                            .addComponent(BtnLimpiar))
                         .addGap(111, 111, 111))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,7 +177,13 @@ public class Interfaz extends javax.swing.JFrame {
                             .addComponent(TextDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(87, 87, 87)
-                        .addComponent(RdbTareaSI)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(BtnAgregar)
+                            .addComponent(RdbTareaSI))))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -226,7 +227,6 @@ public class Interfaz extends javax.swing.JFrame {
         obInterfaz.setLocationRelativeTo(null);
         this.dispose();
 
-        controlador.procesoGestorTareas();
         limpiarCampos();
     }//GEN-LAST:event_mItemNuevaActionPerformed
 
@@ -250,27 +250,33 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void mIPendientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mIPendientesActionPerformed
         // TODO add your handling code here:
+
         Pendientes objPendientes = new Pendientes();
         objPendientes.setVisible(true);
         objPendientes.setLocationRelativeTo(null);
+        controlador.tareasPendiente();
         this.dispose();
-         controlador.procesoGestorTareas();
+
     }//GEN-LAST:event_mIPendientesActionPerformed
 
     private void mICompletasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mICompletasActionPerformed
         // TODO add your handling code here:
+
         Completas objCompletas = new Completas();
+        objCompletas.setControlador(controlador);
         objCompletas.setVisible(true);
         objCompletas.setLocationRelativeTo(null);
-        this.dispose();
         
-        controlador.procesoGestorTareas();
+        controlador.tareasCompletadas();
+        
+
+
     }//GEN-LAST:event_mICompletasActionPerformed
 
     private void BtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarActionPerformed
         // TODO add your handling code here:
         controlador.procesoGestorTareas();
-        
+
 
     }//GEN-LAST:event_BtnAgregarActionPerformed
 
@@ -287,17 +293,24 @@ public class Interfaz extends javax.swing.JFrame {
         return TextDescripcion.getText();
     }
 
-    public void setMostarTareas(String mostrar) {
-        jTextArea1.setText(String.valueOf(mostrar));
-    }
-    
+    public void setMostarTareas(String[] datos) {
+        String cadena = " ";
+        for (int i = 0; i < datos.length; i++) {
 
-    
-    public boolean setPendiente() {
+            cadena = cadena + datos[i] + "\n";
+        }
+        jTextArea1.setText(cadena);
+    }
+
+    public void error(String error) {
+        jTextArea1.setText(error);
+    }
+
+    public boolean isPendiente() {
         return RdbTareaNo.isSelected();
     }
-    
-    public boolean setCompletada() {
+
+    public boolean isCompletada() {
         return RdbTareaSI.isSelected();
     }
 
@@ -327,6 +340,5 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JMenuItem mItemNueva;
     private javax.swing.JMenuItem menuItemCerrar;
     // End of variables declaration//GEN-END:variables
-
 
 }

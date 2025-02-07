@@ -15,10 +15,19 @@ public class Pendientes extends javax.swing.JFrame {
     private Controlador controlador;
     /**
      * Creates new form Pendientes
+
      */
     public Pendientes() {
         initComponents();
     }
+    
+    public Pendientes(Interfaz interfaz, Completas vistaCompletas) {       
+        controlador = new Controlador(vistaCompletas, this, interfaz);
+        vistaCompletas.setControlador(controlador);
+        interfaz.setControlador(controlador);
+    }
+
+   
     public void setControlador(Controlador controlador) {
         this.controlador = controlador;
     }
@@ -223,16 +232,21 @@ public class Pendientes extends javax.swing.JFrame {
         this.dispose();
               
     }//GEN-LAST:event_mICompletas1ActionPerformed
+
     
-    private void mostrarTareas(String[] tareas) {
-        StringBuilder sb = new StringBuilder();
-        for (String tarea : tareas) {
-            if (tarea != null) {
-                sb.append(tarea).append("\n\n");
-            }
+    public void setMostarTareas(String[] datos) {
+        String cadena = "";
+        for (int i = 0; i < datos.length; i++) {
+            cadena = cadena + datos[i];
         }
-        jTextArea1.setText(sb.toString());
+        jTextArea1.setText(cadena);
     }
+    
+    public void error(String error) {
+        jTextArea1.setText(error);
+    }
+    
+
     /**
      * @param args the command line arguments
      */

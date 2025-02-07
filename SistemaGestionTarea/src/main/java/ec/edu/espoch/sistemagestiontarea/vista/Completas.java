@@ -5,24 +5,31 @@
 package ec.edu.espoch.sistemagestiontarea.vista;
 
 import ec.edu.espoch.sistemagestiontarea.controlador.Controlador;
-import ec.edu.espoch.sistemagestiontarea.modelo.Tarea;
-
 
 /**
  *
  * @author papel
  */
 public class Completas extends javax.swing.JFrame {
+
     private Controlador controlador;
+
     /**
      * Creates new form Completas
      */
     public Completas() {
         initComponents();
     }
+
     
     public void setControlador(Controlador controlador) {
         this.controlador = controlador;
+    }
+
+    public Completas(Interfaz interfaz, Pendientes vistaPendientes) {
+        controlador = new Controlador(this, vistaPendientes, interfaz);
+        interfaz.setControlador(controlador);
+        vistaPendientes.setControlador(controlador);
     }
 
     /**
@@ -37,6 +44,7 @@ public class Completas extends javax.swing.JFrame {
         lbdTitulo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        btnMostrar = new javax.swing.JButton();
         jMenuBar2 = new javax.swing.JMenuBar();
         MenuTareas1 = new javax.swing.JMenu();
         mItemNueva1 = new javax.swing.JMenuItem();
@@ -53,6 +61,13 @@ public class Completas extends javax.swing.JFrame {
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
+
+        btnMostrar.setText("Mostrar");
+        btnMostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMostrarActionPerformed(evt);
+            }
+        });
 
         MenuTareas1.setText("Tarea");
 
@@ -108,21 +123,26 @@ public class Completas extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(111, 111, 111)
+                        .addGap(51, 51, 51)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(112, 112, 112)
                         .addComponent(lbdTitulo))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(185, 185, 185)
+                        .addComponent(btnMostrar)))
                 .addContainerGap(56, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGap(17, 17, 17)
                 .addComponent(lbdTitulo)
                 .addGap(18, 18, 18)
+                .addComponent(btnMostrar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addGap(21, 21, 21))
         );
 
         pack();
@@ -150,9 +170,9 @@ public class Completas extends javax.swing.JFrame {
         Pendientes objPendientes = new Pendientes();
         objPendientes.setVisible(true);
         objPendientes.setLocationRelativeTo(null);
+        controlador.tareasPendiente();
         this.dispose();
-        
-        controlador.procesoGestorTareas();
+
 
     }//GEN-LAST:event_mIPendientes1ActionPerformed
 
@@ -161,30 +181,45 @@ public class Completas extends javax.swing.JFrame {
         Completas objCompletas = new Completas();
         objCompletas.setVisible(true);
         objCompletas.setLocationRelativeTo(null);
+        controlador.tareasCompletadas();
         this.dispose();
-        
-        controlador.procesoGestorTareas();
+
 
     }//GEN-LAST:event_mICompletas1ActionPerformed
-    
-    
-    private void mostrarTareas(String[] tareas) {
-        StringBuilder sb = new StringBuilder();
-        for (String tarea : tareas) {
-            if (tarea != null) {
-                sb.append(tarea).append("\n\n");
-            }
+
+    private void btnMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarActionPerformed
+        // TODO add your handling code here:
+        if (controlador == null) {
+            controlador.tareasCompletadas();
+        } else {
+            System.out.println("Error: controlador no inicializado.");
         }
-        jTextArea1.setText(sb.toString());
+    }//GEN-LAST:event_btnMostrarActionPerformed
+
+    public void setMostarTareas(String[] datos) {
+        String cadena = "";
+        for (int i = 0; i < datos.length; i++) {
+            cadena = cadena + datos[i];
+        }
+        jTextArea1.setText(cadena);
     }
+
+    public void error(String error) {
+        if (jTextArea1 != null) {
+        jTextArea1.setText(error);
+    } else {
+        System.err.println("jTextArea1 no está inicializado.");
+    }
+    }
+
     /**
      * @param args the command line arguments
      */
- 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu MenuSalir1;
     private javax.swing.JMenu MenuTareas1;
+    private javax.swing.JButton btnMostrar;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
@@ -194,6 +229,5 @@ public class Completas extends javax.swing.JFrame {
     private javax.swing.JMenuItem mItemNueva1;
     private javax.swing.JMenuItem menuItemCerrar1;
     // End of variables declaration//GEN-END:variables
-
 
 }

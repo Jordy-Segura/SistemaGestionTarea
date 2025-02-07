@@ -18,37 +18,57 @@ public class Controlador {
 
     private Completas completas;
     private Pendientes pendientes;
-    private Interfaz Vista;
+    private Interfaz vista;
     private GestorTareas gestorTareas;
 
-    public Controlador(Completas completas, Pendientes pendientes, Interfaz Vista) {
+    public Controlador(Completas completas, Pendientes pendientes, Interfaz vista) {
         this.completas = completas;
         this.pendientes = pendientes;
-        this.Vista = Vista;
+        this.vista = vista;
         this.gestorTareas = new GestorTareas();
     }
 
-    public void procesoGestorTareas() {                            
-        try{
-        String titulo = Vista.getTituloTarea();
-        String Descripcion = Vista.getDescripcion();
-        boolean Pendiente = Vista.setPendiente();
-        boolean Completada = Vista.setCompletada();
-        
-        Tarea tarea = new Tarea(0, titulo, Descripcion, Completada);
-               
-        gestorTareas.agregarTarea(tarea);
-        
-        if (Completada) {
-            Vista.setMostarTareas(titulo+" "+Descripcion+" "+"Completada");
-        } else  if (Pendiente) {
-            Vista.setMostarTareas(titulo+" "+Descripcion+" "+"Pendiente");
-        }
-        }catch(NumberFormatException e){
-            Vista.setMostarTareas("Error cambiate a ambiental");
+    public void procesoGestorTareas() {
+
+        try {
+            String titulo = vista.getTituloTarea();
+            String descripcion = vista.getDescripcion();
+            boolean completada = vista.isCompletada();
+            String[] agregarTareas = new String[10];
+            Tarea tarea = new Tarea(0, titulo, descripcion, completada);
+            
+
+            agregarTareas = gestorTareas.agregarTarea(tarea);
+
+            vista.setMostarTareas(agregarTareas);
+        } catch (Exception e) {
+            vista.error("Error: " + e.getMessage());
+
         }
     }
-    
-    
+
+    public void tareasCompletadas() {
+        try {
+            
+            String[] tareasCOmpletadas = new String[20];
+            tareasCOmpletadas = gestorTareas.listarTareasCompletadas();
+            completas.setMostarTareas(tareasCOmpletadas);
+        } catch (Exception e) {
+            completas.error("Error: " + e.getMessage());
+
+        }
+    }
+
+    public void tareasPendiente() {
+        try {
+            String[] tareasPendientes = new String[20];
+            tareasPendientes = gestorTareas.listarTareasPendientes();
+            pendientes.setMostarTareas(tareasPendientes);
+        } catch (Exception e) {
+            pendientes.error("Error: " + e.getMessage());
+
+        }
+
+    }
 
 }
